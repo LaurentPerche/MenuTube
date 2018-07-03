@@ -1,0 +1,164 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="chrome=1">
+        <title>{{ site.title | default: site.github.repository_name }} by {{
+            site.github.owner_name }}</title>
+        <!--<link href='https://fonts.googleapis.com/css?family=Arvo:400,700,400italic'-->
+        <!--rel='stylesheet' type='text/css'>-->
+        <link rel="stylesheet"
+              href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+        <script src="{{ '/assets/js/scale.fix.js' | relative_url }}"></script>
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1, user-scalable=no">
+        <!--[if lt IE 9]>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+        <![endif]-->
+        <style>
+            html, body {
+                width: 100%;
+                height: 100%;
+                padding: 0;
+                margin: 0;
+                top: 0;
+                left: 0;
+                overflow: hidden;
+            }
+
+            body {
+                background-size: cover;
+                background-position: center top;
+                background-repeat: no-repeat;
+            }
+
+            section {
+                position: absolute;
+                z-index: 1000;
+                color: white;
+                background-color: rgba(23, 23, 23, 0.975);
+                border: 1px solid #000;
+                border-radius: 4px;
+                padding: 0 1rem;
+                width: auto;
+                max-width: 50rem;
+                float: left;
+                margin: 2rem;
+            }
+
+            section h1 {
+                color: #e03d32;
+            }
+
+            header {
+                bottom: 0;
+                z-index: 2000;
+                width: auto;
+                max-width: 50rem;
+                line-height: 1;
+                margin: 0 1rem;
+            }
+
+            #menutube-banner {
+                cursor: pointer;
+                background-image: url({{site.baseurl}}/MenutubeAsElement.jpg);
+                background-size: contain;
+                background-position: center;
+                background-repeat: no-repeat;
+                width: 621px;
+                height: 759px;
+                position: absolute;
+
+                right: 0;
+                top: 0;
+                left: 0;
+                bottom: 0;
+
+                margin: auto;
+
+                -moz-box-shadow: 0 0 5px #fff;
+                -webkit-box-shadow: 0 0 5px #fff;
+                box-shadow: 0 0 5px #fff;
+
+                opacity: 0;
+                transform: scale(0.000001);
+            }
+
+            #menutube-banner.animate {
+                animation: fade-in 0.5s ease-out 550ms forwards;
+            }
+
+            @keyframes fade-in {
+                0% {
+                    opacity: 0;
+                    transform: scale(0);
+                }
+
+                50% {
+                    opacity: 1;
+                    transform: scale(1.125);
+                }
+                100% {
+                    opacity: 1;
+                    transform: scale(1);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div id="menutube-banner"></div>
+
+        <script>
+            (function () {
+                var image = document.getElementById('menutube-banner'),
+                    origHeight, origWidth;
+
+                var bgImage = document.createElement('img');
+
+                bgImage.onload = function () {
+                    document.body.style.backgroundImage = "url(" + bgImage.src + ")";
+                    setTimeout(function () {
+                        image.classList.add('animate');
+                    }, 550);
+                };
+
+
+                bgImage.src = "{{site.baseurl}}/banner-background.jpg";
+
+                var setImageSize = function () {
+                    if (image.offsetHeight > 0 && image.offsetWidth > 0) {
+                        origHeight = origHeight || image.offsetHeight;
+                        origWidth = origWidth || image.offsetWidth;
+
+                        var ratio = Math.min(innerWidth * .75 / origWidth, innerHeight * .75 / origHeight);
+
+                        image.style.height = origHeight * ratio + 'px';
+                        image.style.width = origWidth * ratio + 'px';
+                    }
+                };
+
+                setImageSize();
+                window.addEventListener('resize', setImageSize, false);
+            }());
+        </script>
+        <!--[if !IE]>
+        <script>fixScale(document);</script><![endif]-->
+        {% if site.google_analytics %}
+        <script type="text/javascript">
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+            ga('create', '{{ site.google_analytics }}', 'auto');
+            ga('send', 'pageview');
+        </script>
+        {% endif %}
+    </body>
+</html>

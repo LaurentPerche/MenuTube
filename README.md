@@ -43,3 +43,11 @@ Folder contains jekyll webapp
 ```
 bundle exec jekyll serve
 ```
+
+### TODO:
+
+- Save position and size on change
+- Restore default positino and size as an option in menu
+- Update available -> show changelog
+- Handle live streams
+- Open youtube video via link

@@ -95,7 +95,6 @@ var defaultMenu = [
 mb.on('ready', function ready() {
     console.info('Main process is ready, continue...');
     console.info('Debug:', !!process.env.npm_config_debug);
-
     /*
      *   Set app menu to be able to use copy and paste shortcuts
      * */
